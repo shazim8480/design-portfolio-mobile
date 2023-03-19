@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, ScrollView, ActivityIndicator } from "react-native";
+import { colors } from "./src/theme/colors";
+// screens
+import Portfolio from "./src/screens/Portfolio";
+// fonts
+import { useFonts } from "expo-font";
+import {
+  PlusJakartaSans_500Medium,
+  PlusJakartaSans_700Bold,
+} from "@expo-google-fonts/plus-jakarta-sans";
 
 export default function App() {
+  const [fontsLoaded, error] = useFonts({
+    body: PlusJakartaSans_500Medium,
+    heading: PlusJakartaSans_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator />; // You can return a loading indicator here
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Portfolio />
       <StatusBar style="auto" />
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // flex: 1,
+    backgroundColor: colors.white,
   },
 });
